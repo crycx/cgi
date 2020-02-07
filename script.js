@@ -4,8 +4,8 @@ const filereader = () => {
         alert("FileReader olemas")
     }
 }
-//input
-const fileUpload = document.querySelector("input#files")
+
+const fileUpload = document.querySelector("input#files") //faili lisamise lahter
 const failiInfo = document.querySelector(".raamatuInfo > ul.info") //üldine info faili kohta
 const loikFailist = document.querySelector(".raamatuInfo > ul.info") //väike lõik faili sisust
 const pikimad = document.querySelector(".pikimad > ul.info") //nimekiri pikimatest sõnadest ja nende pikkustest
@@ -40,11 +40,12 @@ const fileSelected = () => {
 
 
     reader.onload = () => {
-        var tekstiSisu = reader.result
+        var tekstiSisu = reader.result //loeme tekstisisu
         console.log("tekstisisu", tekstiSisu.substring(0,200))
-        var sisu = tekstiSisu.split(/[^a-zA-Z]+/gm)
+        var sisu = tekstiSisu.split(/[^a-zA-ZõäöüÕÄÖÜ]+/gm) //jagame sõnadeks kasutades REGEX-i (koos eestikeele toega ;))
         console.log("sisu", sisu)
 
+        //kuvame väikse väljalõike
         valjaLoige.innerHTML = tekstiSisu.substring(0,500)
         
 
@@ -53,12 +54,14 @@ const fileSelected = () => {
             const kontrollitav = sisu[i]
 
             if(suurimKogumik.some(suurimKogumik => suurimKogumik.tekst.toLowerCase() == kontrollitav.toLowerCase())){
+                //kontrollime kas selline sõna juba olemas nimekirjas
                 continue
             }else{
             //kontrollime sõna pikkust ja kui on sama kui viimane siis lisame arraysse koos pikkusega ja kui pikem, tühjendame array (va esimene)
                 if(i == 0){
                     suurim = kontrollitav.length
                     suurimKogumik.push({tekst: kontrollitav, pikkus: kontrollitav.length})
+                    //kogume sõnad kokku
                     kontroll.push({tekst: kontrollitav, pikkus: kontrollitav.length, count: 0})
                 }else
 
@@ -81,17 +84,14 @@ const fileSelected = () => {
         //loeme ära sõnad mis on 8 või pikemad:
         for (let i = 0; i < kontroll.length; i++) {
             const kontrollitav = kontroll[i];
-            //console.log("Kontrollitav sõna: ", kontrollitav.tekst.toLowerCase())
+            
             if(kontrollitav.tekst.length >= 8){
                 for (let l = 0; l < sisu.length; l++) {
                     const sisend = sisu[l];
                     if(sisend.toLowerCase() == kontrollitav.tekst.toLowerCase()){
-                        //console.log("sobivus leitud", sisend+" : "+kontrollitav.tekst)
+                        //lisame loendise 1 juurde kui sõnad on samad
                         kontrollitav.count += 1
-                    }else{
-                        //console.log("Sisu: "+sisend.toLowerCase()+" != "+kontrollitav.tekst.toLowerCase() )
                     }
-                }
             }
         }
 
@@ -99,6 +99,8 @@ const fileSelected = () => {
         let suurimCount = Math.max.apply(Math,kontroll.map((o) => {return o.count}))
 
         console.log("suurim count", suurimCount)
+
+        //leiame suurima objekti
         let suurimObj = kontroll.find((o) => { return o.count == suurimCount})
 
         console.log("Kõige sagedamini esinev", suurimObj)
