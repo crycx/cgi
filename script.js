@@ -92,6 +92,7 @@ const fileSelected = () => {
                         //lisame loendise 1 juurde kui sõnad on samad
                         kontrollitav.count += 1
                     }
+                }
             }
         }
 
