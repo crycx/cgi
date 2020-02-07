@@ -22,6 +22,8 @@ const fileSelected = () => {
         console.log("Faili tüüp", selectedFile.type)
     console.groupEnd()
 
+    failiInfo.innerHTML = ""
+
     failiInfo.innerHTML = 
     `
         <li>Failinimi: `+ selectedFile.name +`</li>
@@ -46,6 +48,7 @@ const fileSelected = () => {
         console.log("sisu", sisu)
 
         //kuvame väikse väljalõike
+        valjaLoige.innerHTML = ""
         valjaLoige.innerHTML = tekstiSisu.substring(0,500)
         
 
@@ -105,6 +108,9 @@ const fileSelected = () => {
         let suurimObj = kontroll.find((o) => { return o.count == suurimCount})
 
         console.log("Kõige sagedamini esinev", suurimObj)
+        sagedasemSona.querySelector("p").innerHTML = ""
+        sagedasemSona.querySelector("span").innerHTML = ""
+        sagedasemSona.querySelector("ul.info").innerHTML = ""
         sagedasemSona.querySelector("p").innerHTML = "Kõige sagedamine esinev sõna <b>"+suurimObj.tekst+"</b> (esineb "+suurimObj.count+" korda)"
         sagedasemSona.querySelector("span").innerHTML = "Teiste vähemalt 8 tähemärki sõnade sagedused:"
 
@@ -121,7 +127,7 @@ const fileSelected = () => {
 
         
 
-
+        pikimad.innerHTML = ""
 
         console.log("SuurimKogumik", suurimKogumik)
         console.log("Kontroll", kontroll)
