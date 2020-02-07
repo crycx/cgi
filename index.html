@@ -10,14 +10,16 @@
         .tekst {display: none;}   
         .nupud {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
         .nupudVasakule {position: static; transform: unset;}
+        .teave {display: none;}
         .show {display: block;}
+        
     </style>
 </head>
 <body>
     <div id="nupud" class="container d-flex justify-content-center align-items-center nupud">
         <div class="row d-block text-center">
             <div class="text-center"><h2>Lae teksti fail</h2></div>     
-            <button class="btn btn-warning mb-3" onclick="filereader()">Kontrolli FileReader-i toimivust</button><br/>
+            <span class="btn btn-warning mb-3 teave">FileReaderi tugi puudub</span><br/>
             <input type="file" id="files" name="file" />
         </div>
     </div><!-- container -->

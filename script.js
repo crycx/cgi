@@ -1,9 +1,7 @@
 //nupp kontrollimaks kas FileReader API on toetatud
-const filereader = () => {
-    if(FileReader){
-        alert("FileReader olemas")
+    if(!FileReader){
+        document.querySelector(".teave").classList.add("show")
     }
-}
 
 const fileUpload = document.querySelector("input#files") //faili lisamise lahter
 const failiInfo = document.querySelector(".raamatuInfo > ul.info") //üldine info faili kohta
@@ -36,12 +34,15 @@ const fileSelected = () => {
     //lugeja
     var reader = new FileReader()
 
-    let suurim = 0;
-    let suurimKogumik = []
-    let kontroll = []
+
 
 
     reader.onload = () => {
+        //siia et igal lugemisel nullida
+        let suurim = 0;
+        let suurimKogumik = []
+        let kontroll = []
+
         var tekstiSisu = reader.result //loeme tekstisisu
         console.log("tekstisisu", tekstiSisu.substring(0,200))
         var sisu = tekstiSisu.split(/[^a-zA-ZõäöüÕÄÖÜ]+/gm) //jagame sõnadeks kasutades REGEX-i (koos eestikeele toega ;))
